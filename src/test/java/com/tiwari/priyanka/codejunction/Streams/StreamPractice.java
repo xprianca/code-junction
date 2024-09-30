@@ -45,7 +45,9 @@ public class StreamPractice {
 //        System.out.println(collect1);
 
 
-        System.out.println("bacabc".chars().mapToObj(value -> (char)value).collect(Collectors.toMap(Function.identity(), chars -> 1, (a, b) -> a+b , LinkedHashMap::new)).entrySet().stream().filter(integerEntry -> integerEntry.getValue()==1).findFirst().map(integerEntry -> integerEntry.getKey()).orElse('x'));
+        //System.out.println("bacabc".chars().mapToObj(value -> (char)value).collect(Collectors.toMap(Function.identity(), chars -> 1, (a, b) -> a+b , LinkedHashMap::new)).entrySet().stream().filter(integerEntry -> integerEntry.getValue()==1).findFirst().map(integerEntry -> integerEntry.getKey()).orElse('x'));
+        boolean res = isAnagram("rat", "car");
+        System.out.println(res);
 
     }
 
@@ -62,6 +64,14 @@ public class StreamPractice {
 
     private static Integer foo() {
             return null;
+    }
+
+    public static boolean isAnagram(String s, String t) {
+        Map<Integer, Integer> map1=  new HashMap<>();
+
+       s.chars().forEach(value -> map1.put(value, map1.getOrDefault(value, 0) +1));
+       t.chars().forEach(value -> map1.put(value, map1.getOrDefault(value, 0) -1 ));
+       return map1.entrySet().stream().allMatch(entry -> entry.getValue() ==0 );
     }
 
 
